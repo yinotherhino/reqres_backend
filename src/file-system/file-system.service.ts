@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { existsSync } from 'fs';
 import * as fs from 'fs/promises';
-
 @Injectable()
 export class FileSystemService {
   private fs: typeof fs;

@@ -13,13 +13,12 @@ import { User } from './entities/user.entity';
 import { Model } from 'mongoose';
 import { Avatar } from './entities/avatar.entity';
 import { ClientProxy } from '@nestjs/microservices';
-import config from 'src/config';
 
 @Injectable()
 export class UsersService {
   private reqresUrl: string;
   constructor(
-    @Inject(config.EMAIL_SERVICE) private readonly emailClient: ClientProxy,
+    @Inject('EMAIL_SERVICE') private readonly emailClient: ClientProxy,
     private readonly httpService: HttpService,
     private fileSystemService: FileSystemService,
     @InjectModel(User.name) private userModel: Model<User>,

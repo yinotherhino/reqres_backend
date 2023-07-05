@@ -21,3 +21,5 @@
   <li>Try to make a request to signup, email is required</li>
   <li>navigate to localhost:15672 on your browser to view the user interface of rabbit mq</li>
 </ul>
+
+<h1>Local secrets are hardcoded to ensure easy usage for testing purposes</h1>
