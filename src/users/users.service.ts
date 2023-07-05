@@ -1,4 +1,5 @@
 import {
+  Inject,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
@@ -11,21 +12,26 @@ import { InjectModel } from '@nestjs/mongoose';
 import { User } from './entities/user.entity';
 import { Model } from 'mongoose';
 import { Avatar } from './entities/avatar.entity';
+import { ClientProxy } from '@nestjs/microservices';
+import config from 'src/config';
 
 @Injectable()
 export class UsersService {
   private reqresUrl: string;
   constructor(
+    @Inject(config.EMAIL_SERVICE) private readonly emailClient: ClientProxy,
     private readonly httpService: HttpService,
     private fileSystemService: FileSystemService,
     @InjectModel(User.name) private userModel: Model<User>,
     @InjectModel(Avatar.name) private avatarModel: Model<Avatar>,
   ) {
+    this.emailClient.connect().catch((e) => console.log(e));
     this.reqresUrl = 'https://reqres.in/api/users/';
   }
 
   create(createUserDto: CreateUserDto) {
     const createdUser = new this.userModel(createUserDto);
+    this.emailClient.emit('user_created', createdUser);
     return createdUser.save();
   }
 
