@@ -33,7 +33,7 @@ describe('FileSystemService', () => {
 
   it('should get avatar from folder', async () => {
     const file = 'test file';
-    await fs.writeFile(filePath, file);
+    await fs.writeFile('avatars/test', file);
     await service.getAvatar(filePath);
     const fileExists = existsSync(filePath);
     expect(fileExists).toBe(true);

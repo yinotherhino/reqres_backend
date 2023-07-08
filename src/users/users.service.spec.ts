@@ -4,8 +4,7 @@ import { firstValueFrom } from 'rxjs';
 import * as fs from 'fs/promises';
 import mongoose from 'mongoose';
 import { existsSync } from 'fs';
-import exp from 'constants';
-import { FileSystemService } from 'src/file-system/file-system.service';
+import { FileSystemService } from '../file-system/file-system.service';
 describe('UsersService', () => {
   let service: UsersService;
   const filePath = 'avatars/1';
